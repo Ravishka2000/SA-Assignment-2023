@@ -1,0 +1,73 @@
+package stockmanagement;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class StockServiceImpl implements StockService{
+	
+	private final List<Product> inventory = new ArrayList<>();
+	Product product;
+	
+	public StockServiceImpl() {	
+		inventory.add(new Product("Pens", 35, 100, 20));
+		inventory.add(new Product("Pensils", 25, 200, 50));
+		inventory.add(new Product("Papers", 15, 500, 100));
+	}
+	
+	public Product getProductByName(String name) {
+	    for (Product product : inventory) {
+	        if (product.getName().equalsIgnoreCase(name)) {
+	            return product;
+	        }
+	    }
+	    return null;
+	}
+
+	@Override
+	public void addProduct(String name, int quantity, int reorderLevel, double unitPrice) {
+		
+		product = getProductByName(name);
+		
+		if(product == null) {
+			inventory.add(new Product(name, unitPrice, quantity, reorderLevel));			
+		}else {
+			int currentQuantity = product.getQuantity();
+			product.setQuantity(currentQuantity + quantity);
+		}
+		
+        
+        System.out.println("\nUpdated inventory:");
+        for (Product pro : inventory) {
+            System.out.println(pro.getName() );
+        }
+	}
+
+	@Override
+	public void dispatchProduct(String name, int quantity) {
+//		int currentQuantity = inventory.getOrDefault(name, 0);
+//        if (currentQuantity < quantity) {
+//            throw new IllegalArgumentException("Insufficient quantity in inventory");
+//        }
+//        inventory.put(name, currentQuantity - quantity);
+//        
+//        System.out.println("\nUpdated inventory:");
+//        for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
+//            System.out.println(entry.getKey() + ": " + entry.getValue());
+//        }
+	}
+
+	@Override
+	public int getQuantity(String name) {
+//		return inventory.getOrDefault(name, 0);
+		return 0;
+	}
+
+
+	@Override
+	public void deleteProduct(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+}

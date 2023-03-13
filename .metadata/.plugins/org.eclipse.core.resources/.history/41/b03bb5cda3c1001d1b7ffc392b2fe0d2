@@ -1,0 +1,78 @@
+package stockhandler;
+
+import java.util.Scanner;
+
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+
+import stockmanagement.StockService;
+
+public class StockConsumerActivator implements BundleActivator {
+
+Scanner scanner = new Scanner(System.in);
+	
+	private ServiceReference<StockService> inventoryServiceRef;
+    private StockService inventoryService;
+
+	public void start(BundleContext context) throws Exception {
+		
+		String operation = "start";
+		
+		inventoryServiceRef = context.getServiceReference(StockService.class);
+		inventoryService = context.getService(inventoryServiceRef);
+		
+		System.out.println("\n-------- Welcome --------");
+		
+		while(!operation.equalsIgnoreCase("stop")) {
+			
+			System.out.println("\na. Add a Product.");
+			System.out.println("b. Remove a Product.");
+			System.out.println("c. Get Product Quantity.");
+			System.out.println("d. Type \"Stop\" to End.");
+			System.out.println("");
+			
+			System.out.print("Enter the Task : ");
+			operation = scanner.next();
+			
+			if(operation.equalsIgnoreCase("a")) {
+				
+			    System.out.print("Enter product name: ");
+			    String productName = scanner.next();
+			    
+			    System.out.print("Enter quantity: ");
+			    int quantity = scanner.nextInt();
+
+			    inventoryService.addProduct(productName, quantity, 10, 20);
+			    
+			}else if(operation.equalsIgnoreCase("b")) {
+				
+				System.out.print("Enter product name: ");
+			    String productName = scanner.next();
+			    
+			    System.out.print("Enter quantity: ");
+			    int quantity = scanner.nextInt();
+
+//			    inventoryService.removeProduct(productName, quantity);
+			    
+			}else if(operation.equalsIgnoreCase("c")) {
+				
+				System.out.print("Enter product name: ");
+			    String productName = scanner.next();
+
+			    System.out.println(productName + " : " + inventoryService.getQuantity(productName));
+			    
+			}else {
+				break;
+			}
+		}
+		
+
+	}
+
+	public void stop(BundleContext context) throws Exception {
+		System.out.println("Stop Inventory App....");
+		context.ungetService(inventoryServiceRef);
+	}
+
+}

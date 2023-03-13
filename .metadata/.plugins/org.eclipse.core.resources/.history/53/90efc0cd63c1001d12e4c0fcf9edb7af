@@ -1,0 +1,7 @@
+package stockmanagement;
+
+public interface StockService {
+	public void addProduct(String name, int quantity);
+	public void removeProduct(String name, int quantity);
+	public int getQuantity(String name);
+}
