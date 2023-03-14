@@ -25,16 +25,17 @@ Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("\n-------------------------------------");
 		System.out.println("|      Welcome to Inventory App      |");
-		System.out.println("-------------------------------------\n");
+		System.out.println("-------------------------------------");
 		
 		while(!operation.equalsIgnoreCase("stop")) {
 			
-			System.out.println("What would you like to do?\n");
+			System.out.println("\nWhat would you like to do?\n");
 			System.out.println("a. Add a product.");
 			System.out.println("b. Dispatch a product.");
 			System.out.println("c. Remove a product.");
 			System.out.println("d. Get product quantity.");
-			System.out.println("e. Type \"stop\" to end.");
+			System.out.println("e. Export to csv.");
+			System.out.println("f. Type \"stop\" to end.");
 			System.out.println();
 			
 			System.out.print("Enter your choice: ");
@@ -45,7 +46,7 @@ Scanner scanner = new Scanner(System.in);
 				double unitPrice = 0;
 				int rLevel = 0;
 				
-			    System.out.print("Enter product name: ");
+			    System.out.print("\nEnter product name: ");
 			    String productName = scanner.next();
 			    
 			    System.out.print("Enter quantity: ");
@@ -54,10 +55,10 @@ Scanner scanner = new Scanner(System.in);
 			    Product product = inventoryService.getProductByName(productName);
 			    
 			    if(product == null) {
-			    	System.out.println("Enter Unit Price: ");
+			    	System.out.print("Enter Unit Price: ");
 			    	unitPrice = scanner.nextDouble();
 			    	
-			    	System.out.println("Enter Reorder Level: ");
+			    	System.out.print("Enter Reorder Level: ");
 			    	rLevel = scanner.nextInt();
 			    }
 
@@ -88,6 +89,9 @@ Scanner scanner = new Scanner(System.in);
 			    System.out.println("");
 			    System.out.println(productName + " : " + inventoryService.getQuantity(productName));
 			       
+			}else if(operation.equalsIgnoreCase("e")) {
+				
+			    inventoryService.printInventoryToCSV();   
 			}else {
 				break;
 			}
