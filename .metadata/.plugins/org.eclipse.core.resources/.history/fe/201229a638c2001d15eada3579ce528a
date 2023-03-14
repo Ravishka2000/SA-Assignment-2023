@@ -42,8 +42,8 @@ Scanner scanner = new Scanner(System.in);
 			
 			if(operation.equalsIgnoreCase("a")) {
 				
-				double unitPrice = 0;
-				int rLevel = 0;
+				double unitPrice;
+				int rLevel;
 				
 			    System.out.print("Enter product name: ");
 			    String productName = scanner.next();
@@ -55,13 +55,10 @@ Scanner scanner = new Scanner(System.in);
 			    
 			    if(product == null) {
 			    	System.out.println("Enter Unit Price: ");
-			    	unitPrice = scanner.nextDouble();
-			    	
-			    	System.out.println("Enter Reorder Level: ");
-			    	rLevel = scanner.nextInt();
+			    	unitPrice = scanner.nextDouble()
 			    }
 
-			    inventoryService.addProduct(productName, quantity, rLevel, unitPrice);
+			    inventoryService.addProduct(productName, quantity, 10, 20);
 			    
 			}else if(operation.equalsIgnoreCase("b")) {
 				

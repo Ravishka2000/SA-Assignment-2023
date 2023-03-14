@@ -6,7 +6,6 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
-import stockmanagement.Product;
 import stockmanagement.StockService;
 
 public class StockConsumerActivator implements BundleActivator {
@@ -42,26 +41,13 @@ Scanner scanner = new Scanner(System.in);
 			
 			if(operation.equalsIgnoreCase("a")) {
 				
-				double unitPrice = 0;
-				int rLevel = 0;
-				
 			    System.out.print("Enter product name: ");
 			    String productName = scanner.next();
 			    
 			    System.out.print("Enter quantity: ");
 			    int quantity = scanner.nextInt();
-			    
-			    Product product = inventoryService.getProductByName(productName);
-			    
-			    if(product == null) {
-			    	System.out.println("Enter Unit Price: ");
-			    	unitPrice = scanner.nextDouble();
-			    	
-			    	System.out.println("Enter Reorder Level: ");
-			    	rLevel = scanner.nextInt();
-			    }
 
-			    inventoryService.addProduct(productName, quantity, rLevel, unitPrice);
+			    inventoryService.addProduct(productName, quantity, 10, 20);
 			    
 			}else if(operation.equalsIgnoreCase("b")) {
 				
