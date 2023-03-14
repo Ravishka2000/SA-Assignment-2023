@@ -6,4 +6,5 @@ public interface StockService {
 	public int getQuantity(String name);
 	public boolean deleteProduct(String name);
 	public Product getProductByName(String name);
+	public void printInventoryToCSV();
 }
