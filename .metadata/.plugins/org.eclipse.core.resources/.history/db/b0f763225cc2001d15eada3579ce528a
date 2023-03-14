@@ -68,17 +68,15 @@ public class StockServiceImpl implements StockService{
         }else {
         	product.setQuantity(currentQuantity - quantity);
             
-        	System.out.println("\n------------------------");
-    		System.out.println("|   Updated Inventory   |");
-    		System.out.println("------------------------\n");
-    		
-    		System.out.println("------------------------------------------------------------------");
-    		System.out.printf("| %-15s | %-10s | %-13s | %-15s |\n", "Product Name", "In Stock", "Unit Price", "Reorder Level");
-    		System.out.println("------------------------------------------------------------------");
-    		for (Product pro : inventory) {
-    		    System.out.printf("| %-15s | %-10d | Rs.%-10s | %-15s |\n", pro.getName(), pro.getQuantity(), pro.getUnitPrice(), pro.getReOrderLevel());
-    		}
-    		System.out.println("------------------------------------------------------------------\n");
+        	System.out.println("\n-----------------------");
+        	System.out.println("|   Updated Inventory   |");
+        	System.out.println("-----------------------");
+        	System.out.printf("| %-15s | %-10s |\n", "Product Name", "Quantity");
+        	System.out.println("-----------------------");
+        	for (Product pro : inventory) {
+        	    System.out.printf("| %-15s | %-10d |\n", pro.getName(), pro.getQuantity());
+        	}
+        	System.out.println("-----------------------");
         }
 	}
 
@@ -109,25 +107,9 @@ public class StockServiceImpl implements StockService{
 	        inventory.remove(index);
 	        System.out.println("");
 	        System.out.println(temp + " successfully deleted.");
-	        
-	        System.out.println("\n------------------------");
-			System.out.println("|   Updated Inventory   |");
-			System.out.println("------------------------\n");
-			
-			System.out.println("------------------------------------------------------------------");
-			System.out.printf("| %-15s | %-10s | %-13s | %-15s |\n", "Product Name", "In Stock", "Unit Price", "Reorder Level");
-			System.out.println("------------------------------------------------------------------");
-			for (Product pro : inventory) {
-			    System.out.printf("| %-15s | %-10d | Rs.%-10s | %-15s |\n", pro.getName(), pro.getQuantity(), pro.getUnitPrice(), pro.getReOrderLevel());
-			}
-			System.out.println("------------------------------------------------------------------\n");
-	        
 	        return true;
 	    }
 	    return false;
 		
 	}
-	
-	
-	
 }
