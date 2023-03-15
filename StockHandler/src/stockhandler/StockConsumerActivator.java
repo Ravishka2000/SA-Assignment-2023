@@ -37,7 +37,8 @@ Scanner scanner = new Scanner(System.in);
 			System.out.println("e. Get product quantity.");
 			System.out.println("f. Export to csv.");
 			System.out.println("g. Import from a csv.");
-			System.out.println("h. Type \"stop\" to end.");
+			System.out.println("h. View out of stock Products.");
+			System.out.println("i. Type \"stop\" to end.");
 			System.out.println();
 			
 			System.out.print("Enter your choice: ");
@@ -105,6 +106,10 @@ Scanner scanner = new Scanner(System.in);
 				String filePath = scanner.next();
 				
 			    inventoryService.importInventory(filePath); 
+			    
+			}else if(operation.equalsIgnoreCase("h")) {
+				
+			    inventoryService.reorderProducts();; 
 			    
 			}else {
 				break;

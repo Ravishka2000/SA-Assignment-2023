@@ -7,6 +7,7 @@ public interface StockService {
 	public boolean deleteProduct(String name);
 	public void getAllData();
 	public Product getProductByName(String name);
+	public void reorderProducts();
 	public void printInventoryToCSV();
 	public void importInventoryFromCSV();
 	public void importInventory(String filePath);
