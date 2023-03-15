@@ -218,5 +218,39 @@ public class StockServiceImpl implements StockService{
 		}
 		System.out.println("------------------------------------------------------------------\n");
 	}
+
+	@Override
+	public void reorderProducts() {
+		int count = 0;
+		
+		for (Product pro : inventory) {
+			if(pro.getQuantity() <= pro.getReOrderLevel()) {
+				count++;
+			}
+		}
+		
+		if(count == 0) {
+			System.out.println("\n**********  All Stocks are UptoDate.... **********");
+		}else {
+			System.out.println("\n------------------------------------------------------------------");
+			System.out.println("|                     Out of Stocks Products                     |");
+			System.out.println("------------------------------------------------------------------\n");
+			
+			System.out.println("------------------------------------------------------------------");
+			System.out.printf("| %-15s | %-10s | %-13s | %-15s |\n", "Product Name", "In Stock", "Unit Price", "Reorder Level");
+			System.out.println("------------------------------------------------------------------");
+			
+			for (Product pro : inventory) {
+				if(pro.getQuantity() <= pro.getReOrderLevel()) {
+					System.out.printf("| %-15s | %-10d | Rs.%-10s | %-15s |\n", pro.getName(), pro.getQuantity(), pro.getUnitPrice(), pro.getReOrderLevel());
+				}
+			}
+			
+			System.out.println("------------------------------------------------------------------\n");
+		}
+		
+		
+	}
+	
 	
 }
