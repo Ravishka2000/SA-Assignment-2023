@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class StockServiceImpl implements StockService{
 	
@@ -12,9 +13,7 @@ public class StockServiceImpl implements StockService{
 	private Product product;
 	
 	public StockServiceImpl() {	
-		inventory.add(new Product("Pens", 35, 100, 20));
-		inventory.add(new Product("Pensils", 25, 200, 50));
-		inventory.add(new Product("Papers", 15, 500, 100));
+		importInventoryFromCSV();
 	}
 	
 	@Override
@@ -151,6 +150,73 @@ public class StockServiceImpl implements StockService{
 	}
 
 	
+	@Override
+	public void importInventoryFromCSV() {
+	    String filePath = "/Users/ravishkadulshan/desktop/inventory.csv";
+	    File file = new File(filePath);
+
+	    try (Scanner scanner = new Scanner(file)) {
+	        scanner.nextLine();
+
+	        while (scanner.hasNextLine()) {
+	            String line = scanner.nextLine();
+	            String[] fields = line.split(",");
+	            String name = fields[0];
+	            double unitPrice = Double.parseDouble(fields[1]);
+	            int quantity = Integer.parseInt(fields[2]);
+	            int reOrderLevel = Integer.parseInt(fields[3]);
+
+	            Product product = new Product(name, unitPrice, quantity, reOrderLevel);
+	            inventory.add(product);
+	        }
+
+	        System.out.println("\nℹ️ Inventory details imported from " + filePath + " ℹ️");
+	        
+	    } catch (FileNotFoundException e) {
+	        System.out.println("Error opening file: " + e.getMessage());
+	    }
+	}
+
 	
+	@Override
+	public void importInventory(String filePath) {
+	    File file = new File(filePath);
+
+	    try (Scanner scanner = new Scanner(file)) {
+	        scanner.nextLine();
+
+	        while (scanner.hasNextLine()) {
+	            String line = scanner.nextLine();
+	            String[] fields = line.split(",");
+	            String name = fields[0];
+	            double unitPrice = Double.parseDouble(fields[1]);
+	            int quantity = Integer.parseInt(fields[2]);
+	            int reOrderLevel = Integer.parseInt(fields[3]);
+
+	            Product product = new Product(name, unitPrice, quantity, reOrderLevel);
+	            inventory.add(product);
+	        }
+
+	        System.out.println("\nℹ️ Inventory details imported from " + filePath + " ℹ️");
+	        
+	    } catch (FileNotFoundException e) {
+	        System.out.println("Error opening file: " + e.getMessage());
+	    }
+	}
+
+	@Override
+	public void getAllData() {
+		System.out.println("\n------------------------------------------------------------------");
+		System.out.println("|                        Inventory Detais                         |");
+		System.out.println("------------------------------------------------------------------\n");
+		
+		System.out.println("------------------------------------------------------------------");
+		System.out.printf("| %-15s | %-10s | %-13s | %-15s |\n", "Product Name", "In Stock", "Unit Price", "Reorder Level");
+		System.out.println("------------------------------------------------------------------");
+		for (Product pro : inventory) {
+		    System.out.printf("| %-15s | %-10d | Rs.%-10s | %-15s |\n", pro.getName(), pro.getQuantity(), pro.getUnitPrice(), pro.getReOrderLevel());
+		}
+		System.out.println("------------------------------------------------------------------\n");
+	}
 	
 }
