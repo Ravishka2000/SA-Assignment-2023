@@ -37,7 +37,8 @@ public void start(BundleContext context) throws Exception {
 			System.out.println("| 🆓d. Check free space.         |");
 			System.out.println("| 💲e. Calculate parking fee.    |");
 			System.out.println("| 📁f. Export status to CSV.     |");
-			System.out.println("| 🛑g. Type \"Stop\" to End.       |");
+			System.out.println("| 📈g. Import status from CSV.   |");
+			System.out.println("| 🛑h. Type \"Stop\" to End.       |");
 			System.out.println("----------------------------------");
 			
 			System.out.print("\nEnter the service type : ");
@@ -88,7 +89,11 @@ public void start(BundleContext context) throws Exception {
 				
 				garageService.printParkDetailsToCSV();
 			    
-			}else {
+			}else if(operation.equalsIgnoreCase("g")) {
+				
+				garageService.importDetails();
+			}
+			else {
 				break;
 			}
 		}
