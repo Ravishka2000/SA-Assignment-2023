@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: BillingSystemConsumer
+Bundle-SymbolicName: BillingSystemConsumer
+Bundle-Version: 1.0.0.qualifier
+Export-Package: billingsystemconsumer
+Bundle-Activator: billingsystemconsumer.ServiceActivator
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Automatic-Module-Name: BillingSystemConsumer
+Import-Package: billingsystempublisher,
+ org.osgi.framework;version="1.3.0"
+Bundle-ActivationPolicy: lazy
+
