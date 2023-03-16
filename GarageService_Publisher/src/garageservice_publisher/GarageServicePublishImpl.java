@@ -2,6 +2,9 @@ package garageservice_publisher;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class GarageServicePublishImpl implements GarageServicePublish{
 
@@ -113,4 +116,32 @@ public class GarageServicePublishImpl implements GarageServicePublish{
 	    System.out.println("\n -------------------------------");
 	}
 
+	public void printParkDetailsToCSV() {
+		String filename = "/Users/pravi/Downloads" + "/garage_status.csv";
+		File file = new File(filename);
+
+		try {
+		    PrintWriter pw = new PrintWriter(file);
+
+		    // Write header
+		    pw.write("Vehicle Name, Quantity, Capacity, Free Space, Parking Fee\n");
+
+		    for (Map.Entry<String, Integer> entry : garage.entrySet()) {
+		        String name = entry.getKey();
+		        int quantity = entry.getValue();
+		        int cap = capacity.getOrDefault(name, 0);
+		        int freeSpace = cap - quantity;
+		        int fee = parkingfee.getOrDefault(name, 0);
+
+		        // Write data row
+		        pw.write(name + "," + quantity + "," + cap + "," + freeSpace + "," + fee + "\n");
+		    }
+
+		    pw.close();
+		    System.out.println("\nGarage status exported to " + filename);
+		} catch (FileNotFoundException e) {
+		    System.err.println("Error writing to CSV file: " + e.getMessage());
+		}
+		
+	}
 }

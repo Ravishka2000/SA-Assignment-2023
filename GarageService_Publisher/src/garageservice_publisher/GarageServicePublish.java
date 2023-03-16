@@ -7,5 +7,6 @@ public interface GarageServicePublish {
 	public int getVehicles(String name);
 	public void getFreeSlots();
 	public void getParkingFee(String name, int mins);
-
+	public void printParkDetailsToCSV();
+	
 }
