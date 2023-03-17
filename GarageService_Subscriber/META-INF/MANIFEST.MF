@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: GarageService_Subscriber
-Bundle-SymbolicName: GarageService_Subscriber
+Bundle-SymbolicName: ParkingService_Subscriber
 Bundle-Version: 1.0.0.qualifier
 Export-Package: garageservice_subscriber
 Bundle-Activator: garageservice_subscriber.ServiceActivator
