@@ -36,7 +36,9 @@ public void start(BundleContext context) throws Exception {
 			System.out.println("| 🔢c. Get parked vehicles count.|");
 			System.out.println("| 🆓d. Check free space.         |");
 			System.out.println("| 💲e. Calculate parking fee.    |");
-			System.out.println("| 🛑f. Type \"Stop\" to End.       |");
+			System.out.println("| 📁f. Export status to CSV.     |");
+			System.out.println("| 📈g. Import status from CSV.   |");
+			System.out.println("| 🛑h. Type \"Stop\" to End.       |");
 			System.out.println("----------------------------------");
 			
 			System.out.print("\nEnter the service type : ");
@@ -83,6 +85,13 @@ public void start(BundleContext context) throws Exception {
 			    
 				garageService.getParkingFee(vehicleName, mins);
 			    
+			}else if(operation.equalsIgnoreCase("f")) {
+				
+				garageService.printParkDetailsToCSV();
+			    
+			}else if(operation.equalsIgnoreCase("g")) {
+				
+				garageService.importDetails();
 			}
 			else {
 				break;

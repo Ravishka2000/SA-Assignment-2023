@@ -2,6 +2,10 @@ package garageservice_publisher;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class GarageServicePublishImpl implements GarageServicePublish{
 
@@ -113,4 +117,78 @@ public class GarageServicePublishImpl implements GarageServicePublish{
 	    System.out.println("\n -------------------------------");
 	}
 
+	public void printParkDetailsToCSV() {
+		String filename = "/Users/pravi/Downloads" + "/garage_status.csv";
+		File file = new File(filename);
+
+		try {
+		    PrintWriter pw = new PrintWriter(file);
+
+		    // Write header
+		    pw.write("Vehicle Name, Quantity, Capacity, Free Space, Parking Fee\n");
+
+		    for (Map.Entry<String, Integer> entry : garage.entrySet()) {
+		        String name = entry.getKey();
+		        int quantity = entry.getValue();
+		        int cap = capacity.getOrDefault(name, 0);
+		        int freeSpace = cap - quantity;
+		        int fee = parkingfee.getOrDefault(name, 0);
+
+		        // Write data row
+		        pw.write(name + "," + quantity + "," + cap + "," + freeSpace + "," + fee + "\n");
+		    }
+
+		    pw.close();
+		    System.out.println("\nGarage status exported to " + filename);
+		} catch (FileNotFoundException e) {
+		    System.err.println("Error writing to CSV file: " + e.getMessage());
+		}
+		
+	}
+	
+	public void importDetails() {
+
+		String filename = "/Users/pravi/Downloads/garage_status.csv";
+		File file = new File(filename);
+
+	    try {
+	        Scanner scanner = new Scanner(file);
+
+	        // Skip the header row
+	        scanner.nextLine();
+
+	        System.out.println("-----------------------------------------------------------------------");
+	        System.out.format("| %-15s | %-10s | %-10s | %-10s | %-10s |\n", "Item", "Quantity", "Capacity", "Free Space", "Parking Fee");
+	        System.out.println("-----------------------------------------------------------------------");
+	        
+	        while (scanner.hasNextLine()) {
+	            String line = scanner.nextLine();
+	            String[] values = line.split(",");
+
+	            // Parse the data from the CSV file
+	            String name = values[0];
+	            int quantity = Integer.parseInt(values[1]);
+	            int capacity = Integer.parseInt(values[2]);
+	            int freeSpace = Integer.parseInt(values[3]);
+	            int parkingFee = Integer.parseInt(values[4]);
+
+	            // Update the maps with the parsed data
+	            garage.put(name, quantity);
+	            this.capacity.put(name, capacity);
+	            parkingfee.put(name, parkingFee);
+
+	            // Print the imported details in a table
+	            System.out.format("| %-15s | %-10d | %-10d | %-10d | %-10d |\n", name, quantity, capacity, freeSpace, parkingFee);
+
+
+	        }
+	        System.out.println("-----------------------------------------------------------------------");
+
+	        scanner.close();
+	        System.out.println("\nGarage status imported from " + file);
+
+	    } catch (FileNotFoundException e) {
+	        System.err.println("Error reading from CSV file: " + e.getMessage());
+	    }
+	}
 }
