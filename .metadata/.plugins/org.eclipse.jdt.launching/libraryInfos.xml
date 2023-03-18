@@ -2,5 +2,7 @@
 <libraryInfos>
     <libraryInfo home="/Library/Java/JavaVirtualMachines/jdk-18.0.2.1.jdk/Contents/Home" version="18.0.2.1"/>
     <libraryInfo home="/Users/ravishkadulshan/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.x86_64_17.0.6.v20230204-1729/jre" version="17.0.6"/>
+    <libraryInfo home="C:\Program Files\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.2.v20220201-1208" version="17.0.2"/>
     <libraryInfo home="/Users/ravishkadulshan/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.x86_64_17.0.6.v20230204-1729" version="17.0.6"/>
+    <libraryInfo home="C:\Program Files\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.2.v20220201-1208\jre" version="17.0.2"/>
 </libraryInfos>
