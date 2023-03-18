@@ -17,24 +17,37 @@ public class ServiceActivator implements BundleActivator {
 
 
 	public void start(BundleContext context) throws Exception {
-		String operation = "start";
+		String operation = "start", cutomerType;
+		double discount;
 		
 		billingServiceRef = context.getServiceReference(BillingService.class);
 		billingService = context.getService(billingServiceRef);
 		
-		System.out.println("\n-------- Welcome --------");
+		System.out.println("");
+		System.out.println("--------------------------------------");
+		System.out.println("|      Welcome to Billing System     |");
+		System.out.println("--------------------------------------");
+		
+		System.out.println("");
+		System.out.print("Enter Customer Type(Loyalty-L / Normal-N) : ");
+		cutomerType = scanner.next();
 		
 		while(!operation.equalsIgnoreCase("stop")) {
 			
-			System.out.println("\na. Add a price.");
-			System.out.println("b. Remove a price.");
+			System.out.println("\nPlease select a task");
+			System.out.println("");
+			System.out.println("a. Add Item.");
+			System.out.println("b. Remove Item.");
 			System.out.println("c. Get Total.");
-			System.out.println("d. Get Total Bill.");
-			System.out.println("e. Type \"Stop\" to End.");
+			System.out.println("d. Get Discount.");
+			System.out.println("e. Get Total Bill.");
+			System.out.println("f. Print Bill.");
+			System.out.println("g. Type \"Stop\" to End.");
 			System.out.println("");
 			
 			System.out.print("Enter the Task : ");
 			operation = scanner.next();
+			System.out.println("");
 			
 			if(operation.equalsIgnoreCase("a")) {
 				
@@ -48,7 +61,7 @@ public class ServiceActivator implements BundleActivator {
 			    
 			}else if(operation.equalsIgnoreCase("b")) {
 				
-				System.out.print("Enter product name: ");
+				System.out.print("Enter product: ");
 			    String productName = scanner.next();
 			    
 			    System.out.print("Enter quantity: ");
@@ -62,8 +75,28 @@ public class ServiceActivator implements BundleActivator {
 				
 				
 			}else if(operation.equalsIgnoreCase("d")) {
+				if(cutomerType.equalsIgnoreCase("L")) {
+					discount = billingService.clacDiscount(15);
+				}else {
+					discount = 0;
+				}
+				
+				System.out.println("Discount : " + discount);
+				
+			}else if(operation.equalsIgnoreCase("e")) {
+				
+				if(cutomerType.equalsIgnoreCase("L")) {
+					discount = billingService.clacDiscount(15);
+				}else {
+					discount = 0;
+				}
+				
 				System.out.println("");
-				billingService.getTotalBill();
+				billingService.getTotalBill(discount);
+				
+			}else if(operation.equalsIgnoreCase("f")) {
+				
+				billingService.printBill();
 				
 			}else {
 				
