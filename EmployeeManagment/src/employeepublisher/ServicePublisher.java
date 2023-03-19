@@ -8,6 +8,7 @@ public interface ServicePublisher {
 	public boolean removeEmployees(int id);
 	public boolean contains(int id);
 	public void getAnEmployee(int id);
+	public void importToCsv(String path);
 	
 
 }
