@@ -41,7 +41,8 @@ public class Activator implements BundleActivator {
 		System.out.println("b. To remove an employee enter 'REMOVE'");
 		System.out.println("c. To view all employees enter 'VIEW'");
 		System.out.println("d. To view an employee enter 'VIEW EMPLOYEE'");
-		System.out.println("e. To exit enter 'EXIT'"+"\n");
+		System.out.println("e. To export to a CSV file enter 'EXPORT'");
+		System.out.println("f. To exit enter 'EXIT'"+"\n");
 		
 		Scanner ob = new Scanner(System.in);
 		
@@ -102,7 +103,15 @@ public class Activator implements BundleActivator {
 			}else if(action.equalsIgnoreCase("view")){
 				servicePublish.viewEmployees();
 				
-			}else if(action.equalsIgnoreCase("view employee")) {
+			}else if(action.equalsIgnoreCase("export")) {
+				
+				System.out.print("Enter the file path: ");
+				String path = ob.nextLine();
+				
+				servicePublish.importToCsv(path);
+				
+			}
+			else if(action.equalsIgnoreCase("view employee")) {
 				System.out.print("Enter the id of the employee: ");
 				id = ob.nextInt();
 				servicePublish.getAnEmployee(id);
@@ -117,7 +126,8 @@ public class Activator implements BundleActivator {
 			System.out.println("b. To remove an employee enter 'REMOVE'");
 			System.out.println("c. To view all employees enter 'VIEW'");
 			System.out.println("d. To view an employee enter 'VIEW EMPLOYEE'");
-			System.out.println("e. To exit enter 'EXIT'"+"\n");
+			System.out.println("e. To export to a CSV file enter 'EXPORT'");
+			System.out.println("f. To exit enter 'EXIT'"+"\n");
 			
 			ob = new Scanner(System.in);
 			str1 = new Scanner(System.in);
